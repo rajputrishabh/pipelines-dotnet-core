@@ -14,5 +14,5 @@ steps:
 #  displayName: 'dotnet build 
 - task: CmdLine@2
   inputs:
-    script: 'echo $buildConfiguration''
+    script: 'echo $buildConfiguration'
 
