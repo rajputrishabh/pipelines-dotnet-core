@@ -15,4 +15,14 @@ steps:
 - task: CmdLine@2
   inputs:
     script: 'echo $buildConfiguration'
+    
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: |
+      # Write your commands here
+      
+      echo $buildConfiguration'
+
+
 
