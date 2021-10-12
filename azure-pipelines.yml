@@ -1,21 +1,10 @@
-# ASP.NET Core
-# Build and test ASP.NET Core projects targeting .NET Core.
-# Add steps that run tests, create a NuGet package, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
-
 trigger:
 - master
 
 pool:
   vmImage: ubuntu-latest
 
-steps:
-#- script: dotnet build --configuration $(buildConfiguration)
-#  displayName: 'dotnet build 
-- task: CmdLine@2
-  inputs:
-    script: echo $buildConfiguration
-    
+steps: 
 - task: Bash@3
   inputs:
     targetType: 'inline'
@@ -37,20 +26,14 @@ steps:
     version: '2.x'
     includePreviewVersions: true
 
-# - task: NuGetCommand@2
-#   displayName: Nuget restore
-#   inputs:
-#     command: 'restore'
-#     restoreSolution: '**/*.sln'
-#     feedsToUse: 'select'
-
 - task: DotNetCoreCLI@2
+  displayName: Restore packages
   inputs:
     command: 'restore'
     projects: '**/*.csproj'
     feedsToUse: 'select'
 - task: DotNetCoreCLI@2
-  displayName: Build
+  displayName: Build artifact
   inputs:
     command: 'build'
     projects: '**/*.csproj'
@@ -62,12 +45,13 @@ steps:
     projects: '**/*Tests/*.csproj'
     arguments: '--configuration $(buildConfiguration)'
 - task: DotNetCoreCLI@2
-  displayName: Running test
+  displayName: Collecting code coverage
   inputs:
     command: 'test'
     projects: '**/*Tests/*.csproj'
     arguments: '--configuration $(buildConfiguration) --collect "Code coverage"'
 - task: DotNetCoreCLI@2
+  displayName: Dotnet publish
   inputs:
     command: 'publish'
     publishWebProjects: true
