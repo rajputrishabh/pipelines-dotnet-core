@@ -21,7 +21,7 @@ steps:
     targetType: 'inline'
     script: |
       # Write your commands here
-      echo 'Present working directory is $(System.DefaultWorkingDirectory)
+      echo 'Present working directory is $(System.DefaultWorkingDirectory)'
       echo 'Artifact directory is $(Build.ArtifactStagingDirectory)'
 - task: UseDotNet@2
   displayName: Set dotnet sdk
