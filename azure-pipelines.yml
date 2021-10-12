@@ -14,15 +14,15 @@ steps:
 #  displayName: 'dotnet build 
 - task: CmdLine@2
   inputs:
-    script: 'echo $buildConfiguration'
+    script: echo $buildConfiguration
     
 - task: Bash@3
   inputs:
     targetType: 'inline'
     script: |
       # Write your commands here
-      echo ' Present working directory is $System.DefaultWorkingDirectory'
-      echo ' Artifact directory is $Build.ArtifactStagingDirectory'
+      echo 'Present working directory is $(System.DefaultWorkingDirectory)
+      echo 'Artifact directory is $(Build.ArtifactStagingDirectory)'
 - task: UseDotNet@2
   displayName: Set dotnet sdk
   inputs:
@@ -47,7 +47,7 @@ steps:
   displayName: Build
   inputs:
     command: 'build'
-    projects: 'pipelines-dotnet-core.csproj'
+    projects: '**/*.csproj'
 
 - task: PublishBuildArtifacts@1
   displayName: Publish artifact
