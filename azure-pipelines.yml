@@ -36,6 +36,13 @@ steps:
     packageType: 'runtime'
     version: '5.x'
     includePreviewVersions: true
+
+- task: NuGetCommand@2
+  displayName: Nuget restore
+  inputs:
+    command: 'restore'
+    restoreSolution: '**/*.sln'
+    feedsToUse: 'select'
 - task: DotNetCoreCLI@2
   displayName: Build
   inputs:
