@@ -22,7 +22,7 @@ steps:
     script: |
       # Write your commands here
       
-      echo $buildConfiguration'
+      echo '$buildConfiguration'
 
 
 
