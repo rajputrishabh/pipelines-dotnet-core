@@ -37,23 +37,46 @@ steps:
     version: '2.x'
     includePreviewVersions: true
 
-- task: NuGetCommand@2
-  displayName: Nuget restore
+# - task: NuGetCommand@2
+#   displayName: Nuget restore
+#   inputs:
+#     command: 'restore'
+#     restoreSolution: '**/*.sln'
+#     feedsToUse: 'select'
+
+- task: DotNetCoreCLI@2
   inputs:
     command: 'restore'
-    restoreSolution: '**/*.sln'
+    projects: '**/*.csproj'
     feedsToUse: 'select'
 - task: DotNetCoreCLI@2
   displayName: Build
   inputs:
     command: 'build'
     projects: '**/*.csproj'
-
+    arguments: '--configuration $(buildConfiguration)'
+- task: DotNetCoreCLI@2
+  displayName: Running test
+  inputs:
+    command: 'test'
+    projects: '**/*Tests/*.csproj'
+    arguments: '--configuration $(buildConfiguration)'
+- task: DotNetCoreCLI@2
+  displayName: Running test
+  inputs:
+    command: 'test'
+    projects: '**/*Tests/*.csproj'
+    arguments: '--configuration $(buildConfiguration) --collect "Code coverage"'
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'publish'
+    publishWebProjects: true
+    arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
 - task: PublishBuildArtifacts@1
   displayName: Publish artifact
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'drop'
+    ArtifactName: 'MYartifact'
     publishLocation: 'Container'
 
 
