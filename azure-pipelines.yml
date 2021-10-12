@@ -23,6 +23,18 @@ steps:
       # Write your commands here
       
       echo '$buildConfiguration'
+- task: DotNetCoreCLI@2
+  displayName: Build
+  inputs:
+    command: 'build'
+    projects: 'pipelines-dotnet-core.csproj'
+
+- task: PublishBuildArtifacts@1
+  displayName: Publish artifact
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
 
 
 
