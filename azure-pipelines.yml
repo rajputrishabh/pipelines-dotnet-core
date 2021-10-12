@@ -21,8 +21,19 @@ steps:
     targetType: 'inline'
     script: |
       # Write your commands here
-      
-      echo '$buildConfiguration'
+      echo ' Present working directory is $System.DefaultWorkingDirectory'
+      echo ' Artifact directory is $Build.ArtifactStagingDirectory'
+- task: UseDotNet@2
+  inputs:
+    packageType: 'sdk'
+    version: '5.0'
+    includePreviewVersions: true
+
+- task: UseDotNet@2
+  inputs:
+    packageType: 'runtime'
+    version: '5.0'
+    includePreviewVersions: true
 - task: DotNetCoreCLI@2
   displayName: Build
   inputs:
