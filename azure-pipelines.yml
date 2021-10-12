@@ -27,14 +27,14 @@ steps:
   displayName: Set dotnet sdk
   inputs:
     packageType: 'sdk'
-    version: '5.x'
+    version: '2.x'
     includePreviewVersions: true
 
 - task: UseDotNet@2
   displayName: Set dotnet runtime
   inputs:
     packageType: 'runtime'
-    version: '5.x'
+    version: '2.x'
     includePreviewVersions: true
 
 - task: NuGetCommand@2
