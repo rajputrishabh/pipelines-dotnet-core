@@ -34,7 +34,8 @@ steps:
     feedsToUse: 'select'
 - task: WhiteSource@21
   inputs:
-    cwd: '$(System.DefaultWorkingDirectory)'
+    cwd: 
+    projectName: 'Scan-vul'
 - task: DotNetCoreCLI@2
   displayName: Build artifact
   inputs:
